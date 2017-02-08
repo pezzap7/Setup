@@ -3,15 +3,16 @@
 
 CONFIG="/etc/ssh/sshd_config"
 
-apt-get update
-apt-get upgrade
-#apt-get install openssh-server
+yum update
+yum upgrade
+yum install openssh-server
 
 ssh-keygen
 #ssh-copy-id username@serverip
 #make sshd_config and add settings
 
 {
+echo 'PermitRootLogin no'
 echo 'PasswordAuthentication no'
 echo 'PubkeyAuthentication yes'
 echo 'ChallengeResponseAuthentication no'
@@ -19,6 +20,6 @@ echo 'ChallengeResponseAuthentication no'
 
 systemctl reload sshd
 
-ufw allow OpenSSH
-ufw enable
-ufw status
+firewall-cmd -permanent --add-service=ssh
+systemctl restart firewalld.service
+firewall-cmd --list-services
