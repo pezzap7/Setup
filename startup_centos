@@ -5,7 +5,7 @@ CONFIG="/etc/ssh/sshd_config"
 
 yum update
 yum upgrade
-yum install openssh-server
+#yum install openssh-server
 
 ssh-keygen
 #ssh-copy-id username@serverip
@@ -20,6 +20,6 @@ echo 'ChallengeResponseAuthentication no'
 
 systemctl reload sshd
 
-firewall-cmd -permanent --add-service=ssh
+firewall-cmd --permanent --add-service=ssh
 systemctl restart firewalld.service
 firewall-cmd --list-services
